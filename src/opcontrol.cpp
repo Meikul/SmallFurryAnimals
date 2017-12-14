@@ -31,6 +31,9 @@ const unsigned int motors[128] =
 
 void operatorControl() {
 	while (1) {
+
+
+
 		// Mogo
 		int mogoOutBtn = joystickGetDigital(1, 7, 2);
 		int mogoInBtn = joystickGetDigital(1, 7, 1);

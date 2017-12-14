@@ -30,5 +30,4 @@
 
 
 void autonomous() {
-  driveSet(0, 1);
 }
