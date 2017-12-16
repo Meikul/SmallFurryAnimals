@@ -32,7 +32,12 @@
 extern "C" {
 #endif
 
-
+// Shortcuts
+#define intakeLim digitalRead(3)
+// Constants
+#define baseStackHeight 100
+#define coneIncrement 50
+#define liftBottom 0
 // Motors
 #define mogoR 1
 #define liftR 2
@@ -52,7 +57,6 @@ extern "C" {
 #define encR2 12
 #define potL 9
 #define potR 10
-#define intakeLim 3
 
 
 void driveSet(int left, int right);
