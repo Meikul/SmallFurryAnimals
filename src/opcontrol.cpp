@@ -42,34 +42,40 @@ int autoState = 0;
 int stackHeight = baseStackHeight;
 
 void operatorControl() {
-
-  bool autoStackEnabled = true;
-  TaskHandle autoTaskHandle = null;
+  // AUTOSTACKING
+  // bool autoStackEnabled = true;
+  // TaskHandle autoStackHandle = NULL;
+  // int autoStatus = 0;
 
 	while (1) {
+    // AUTOSTACKING
+    // bool autoStackOnBtn = joystickGetDigital(1, 8, JOY_DOWN);
+    // bool autoStackOffBtn = joystickGetDigital(1, 8, JOY_UP);
+    // if(autoStackOnBtn) autoStackEnabled = true;
+    // else if(autoStackOffBtn) autoStackEnabled = false;
+    // if(autoState == -1){
+    //   taskDelete(autoStackHandle);
+    //   autoStatus = 0;
+    // }
+    // // Auto Stacking
+    // if(autoStackEnabled){
+    //   if(autoState == 0 && intakeInBtn){
+    //     // autoStackHandle = taskCreate(autoStack, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+    //   }
+    // }
+    // else{
+    //   autoState = 0;
+    //   manualIntake();
+    //   manualLift();
+    // }
+    //
+    // bool resetStackHeightBtn = joystickGetDigital(1,8,JOY_RIGHT);
+    // if(resetStackHeightBtn) stackHeight = baseStackHeight;
 
-    bool autoStackOnBtn = joystickGetDigital(1, 8, JOY_DOWN);
-    bool autoStackOffBtn = joystickGetDigital(1, 8 JOY_UP);
-    if(autoStackOnBtn) autoStackEnabled = true;
-    else if(autoStackOffBtn) autoStackEnabled = false;
-    if(autoState == -1){
-      taskDelete(autoStackHandle);
-      autoStatus = 0;
-    }
-    // Auto Stacking
-    if(autoStackEnabled){
-      if(autoState == 0 && intakeInBtn){
-        autoStackHandle = taskCreate(autoStack, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
-      }
-    }
-    else{
-      autoState = 0;
-      manualIntake();
-      manualLift();
-    }
-
-    bool resetStackHeightBtn = joystickGetDigital(1,8,JOY_RIGHT);
-    if(resetStackHeightBtn) stackHeight = baseStackHeight;
+    // Lift
+    int liftUpBtn = joystickGetDigital(1, 5, JOY_UP);
+    int liftDownBtn = joystickGetDigital(1, 5, JOY_DOWN);
+    liftSet((liftUpBtn - liftDownBtn) * 127);
 
 		// Mogo
 		int mogoOutBtn = joystickGetDigital(1, 7, 2);
@@ -82,42 +88,42 @@ void operatorControl() {
 		delay(20);
 	}
 }
+// AUTOSTACKING
+// void autoStack(){
+//   // Change autostate to executing
+//   autoState = 1;
+//   // Wait for cone in intake
+//   while(intakeLim == 1 && valid()){
+//     manualIntake();
+//     delay(40);
+//   }
+//   // Wait for lift button
+//   while(!liftUpBtn && valid()) delay(100);
+//   // Lift to height
+//   liftTo(stackHeight);
+//   stackHeight+=coneIncrement;
+//   // Intake to stack
+//   intakeSet(127);
+//   delay(500);
+//   intakeSet(0);
+//   // Lift to bottom
+//   liftTo(liftBottom);
+//   // Reset autostate
+//   autoState = 0;
+// }
 
-void autoStack(){
-  // Change autostate to executing
-  autoState = 1;
-  // Wait for cone in intake
-  while(intakeLim == 1 && valid()){
-    manualIntake();
-    delay(40);
-  }
-  // Wait for lift button
-  while(!liftUpBtn && valid()) delay(100);
-  // Lift to height
-  liftTo(stackHeight);
-  stackHeight+=coneIncrement;
-  // Intake to stack
-  intakeSet(127);
-  delay(500);
-  intakeSet(0);
-  // Lift to bottom
-  liftTo(liftBottom);
-  // Reset autostate
-  autoState = 0;
-}
-
-bool valid(){
-  bool btn = joystickGetDigital(1,6,1);
-  if(btn) autoStatus = -1;
-  return !btn;
-}
+// bool valid(){
+//   bool btn = joystickGetDigital(1,6,1);
+//   if(btn) autoStatus = -1;
+//   return !btn;
+// }
 
 void manualIntake(){
   int inBtn = intakeInBtn;
   int outBtn = intakeOutBtn;
   intakeSet((inBtn - outBtn) * 127);
 }
-
+// AUTOSTACKING
 // void autoLift(){
 //   int height = (analogRead(potL) + analogRead(potR)) / 2;
 //   int cancleBtn = joystickGetAnalog(1, 6, JOY_DOWN);
@@ -190,11 +196,9 @@ void liftSet(int power){
 }
 
 void intakeSet(int power){
-	motorSet(intakeL, power);
-	motorSet(intakeR, -power);
+	motorSet(intake, power);
 }
 
 void mogoSet(int power){
-	motorSet(mogoL, -power);
-	motorSet(mogoR, power);
+	motorSet(mogo, -power);
 }

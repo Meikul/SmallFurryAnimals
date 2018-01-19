@@ -20,6 +20,7 @@
  * obtained from http://sourceforge.net/projects/freertos/files/ or on request.
  */
 
+
 #ifndef MAIN_H_
 
 // This prevents multiple inclusion, which isn't bad for this file but is good practice
@@ -39,30 +40,33 @@ extern "C" {
 #define coneIncrement 50
 #define liftBottom 0
 // Motors
-#define mogoR 1
-#define liftR 2
-#define liftL 3
+#define intake 1
+#define liftTR 2
+#define liftBR 3
 #define driveMidR 4
 #define driveOutR 5
 #define driveOutL 6
 #define driveMidL 7
-#define intakeR 8
-#define intakeL 9
-#define mogoL 10
+#define liftBL 8
+#define liftTL 9
+#define mogo 10
 
 // Digital
-#define encL1 1
-#define encL2 2
+#define liftR 1
+#define liftL 2
 #define encR1 11
 #define encR2 12
-#define potL 9
-#define potR 10
+#define encL1 9
+#define encL2 10
 
 
 void driveSet(int left, int right);
 void liftSet(int power);
 void intakeSet(int power);
 void mogoSet(int power);
+
+// Encoder driveR;
+// Encoder driveL;
 
 // A function prototype looks exactly like its declaration, but with a semicolon instead of
 // actual code. If a function does not match a prototype, compile errors will occur.

@@ -21,6 +21,9 @@
  * configure a UART port (usartOpen()) but cannot set up an LCD (lcdInit()).
  */
 void initializeIO() {
+  for(int i=1; i<11; i++){
+    pinMode(i, INPUT);
+  }
 }
 
 /*
@@ -37,4 +40,6 @@ void initializeIO() {
  * can be implemented in this task if desired.
  */
 void initialize() {
+  // driveR = encoderInit(encR1, encR2, false);
+  // driveL = encoderInit(encL1, encL2, false);
 }
